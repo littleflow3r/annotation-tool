@@ -1,0 +1,147 @@
+ 
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <meta charset="utf-8">
+    <html>
+      <head>
+        <script src="jquery.min.js"></script>
+       <title>TASK 1: Process Identification </title>
+      </head>
+      <body>
+
+        <h1>TASK 1: Process Identification</h1>
+
+        <table border="1">
+          <input type="hidden" id="taskid" value="1" disabled>
+          <tr><b>DOC ID: </b> <input type="text" id="docid" value="sample" disabled> </tr> <br>
+          <tr><b>YOUR ID: </b> <input type="text" id="anid" value="your name here" ></tr>
+          <br><br>
+      
+ 
+    <tr>
+        <td width="20px">1</td>
+        <td width="200px">This is sentence one</td>
+        <td>
+          <select id="1">
+            <option value="1" selected="selected">Process</option>
+            <option value="0">Non-Process</option>
+          </select>
+        </td>
+      </tr>
+       
+    <tr>
+        <td width="20px">2</td>
+        <td width="200px">This is sentence two</td>
+        <td>
+          <select id="2">
+            <option value="1" selected="selected">Process</option>
+            <option value="0">Non-Process</option>
+          </select>
+        </td>
+      </tr>
+       
+    <tr>
+        <td width="20px">3</td>
+        <td width="200px">This is sentence three</td>
+        <td>
+          <select id="3">
+            <option value="1" selected="selected">Process</option>
+            <option value="0">Non-Process</option>
+          </select>
+        </td>
+      </tr>
+       
+    <tr>
+        <td width="20px">4</td>
+        <td width="200px">This is sentence four</td>
+        <td>
+          <select id="4">
+            <option value="1" selected="selected">Process</option>
+            <option value="0">Non-Process</option>
+          </select>
+        </td>
+      </tr>
+       
+    <tr>
+        <td width="20px">5</td>
+        <td width="200px">This is sentence five</td>
+        <td>
+          <select id="5">
+            <option value="1" selected="selected">Process</option>
+            <option value="0">Non-Process</option>
+          </select>
+        </td>
+      </tr>
+       
+    <tr>
+        <td width="20px">6</td>
+        <td width="200px">This is sentence six</td>
+        <td>
+          <select id="6">
+            <option value="1" selected="selected">Process</option>
+            <option value="0">Non-Process</option>
+          </select>
+        </td>
+      </tr>
+      
+
+    </table>
+   
+    <button id="DownloadButton">CREATE FILE!</button>
+    <div id="generated" style="display:none">
+      <a href="#" id="DownloadLink">DOWNLOAD</a>
+      <textarea id="ResultXml" style="width: 100%; height: 30em" readonly="readonly"></textarea>
+    </div>
+    
+
+    <script id="jsbin-javascript">
+    $(function () {
+    $('#DownloadButton').click(update);
+    });
+
+    var template = [
+        '<?xml version="1.0"?>',
+        '<annotation_task_1>',
+    
+      '<taskid> <?taskid?> </taskid>',
+      '<anid> <?anid?> </anid>',
+      '<docid> <?docid?> </docid>',
+     
+        '<s1><?s1?></s1>', 
+        '<s2><?s2?></s2>', 
+        '<s3><?s3?></s3>', 
+        '<s4><?s4?></s4>', 
+        '<s5><?s5?></s5>', 
+        '<s6><?s6?></s6>',
+    '</annotation_task_1>'
+    ].join('\r\n');
+    
+
+    function update() {
+      var variables = {
+      'taskid': $('#taskid').val(),
+      'anid': $('#anid').val(),
+      'docid': $('#docid').val(), 
+        's1': $('#1').val(), 
+        's2': $('#2').val(), 
+        's3': $('#3').val(), 
+        's4': $('#4').val(), 
+        's5': $('#5').val(), 
+        's6': $('#6').val(),};
+
+    var newXml = template.replace(/<\?(\w+)\?>/g,
+    function(match, name) {
+      return variables[name];
+    });
+
+    var xmlname = $('#taskid').val()+'_'+$('#anid').val()+'_'+$('#docid').val()+'.xml';
+  
+    $('#ResultXml').val(newXml);
+    $('#DownloadLink')
+        .attr('href', 'data:text/xml;base64,' + btoa(newXml))
+        .attr('download', xmlname);
+    $('#generated').show();
+    }
+
+    </script>
+    </body>
+    </html> 

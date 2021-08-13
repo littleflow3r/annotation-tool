@@ -1,2 +1,2 @@
 # Annotation_Tool
-Repository for my annotation tool, using HTML+Javascript
+Repository for my simple NLP annotation tool, created using HTML+Javascript
